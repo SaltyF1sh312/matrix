@@ -217,6 +217,9 @@ public abstract class GenericMatrix<E extends Number> {
 	 * @return the <code>GenericMatrix</code> after commutation
 	 */
 	public GenericMatrix<E> commuteRow(int row1, int row2) {
+		if (row1 == row2)
+			return this;
+		
 		for (int i = 0; i < getColumn(); i++) {
 			E temp = getValue(row1, i);
 			setValue(row1, i, getValue(row2, i));
