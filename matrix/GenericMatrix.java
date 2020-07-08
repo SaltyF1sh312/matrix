@@ -353,20 +353,16 @@ public abstract class GenericMatrix<E extends Number> {
 	 * @return the complement minor of the matrix
 	 */
 	public GenericMatrix<E> getComplementMinor(int row, int column) {
-		GenericMatrix<E> complementMinor = zeros(getRow() - 1, getColumn() - 1);
+		GenericMatrix<E> complementMinor = zeros(this.row - 1, this.column - 1);
 		for (int i = 0; i < complementMinor.getRow(); i++) {
 			for (int j = 0; j < complementMinor.getColumn(); j++) {
-				// Numbers at the top left-hand corner
-				if (i < complementMinor.getRow() && j < complementMinor.getColumn())
+				if (i < row && j < column) // Numbers at the top left-hand corner
 					complementMinor.setValue(i, j, getValue(i, j));
-				// Numbers at the top right-hand corner
-				else if (i < complementMinor.getRow() && j >= complementMinor.getColumn())
+				else if (i < row && j >= column) // Numbers at the top right-hand corner
 					complementMinor.setValue(i, j, getValue(i, j + 1));
-				// Numbers at the bottom left-hand corner
-				else if (i >= complementMinor.getRow() && j < complementMinor.getColumn())
+				else if (i >= row && j < column) // Numbers at the bottom left-hand corner
 					complementMinor.setValue(i, j, getValue(i + 1, j));
-				// Numbers at the bottom right-hand corner
-				else if (i >= complementMinor.getRow() && j >= complementMinor.getColumn())
+				else if (i >= row && j >= column) // Numbers at the bottom right-hand corner
 					complementMinor.setValue(i, j, getValue(i + 1, j + 1));
 			}
 		}
@@ -393,25 +389,11 @@ public abstract class GenericMatrix<E extends Number> {
 	public E getDeterminant() {
 		E result = zero();
 		
-		if (getRow() > 2) {
-			for (int i = 0; i < getColumn(); i++) {
-				GenericMatrix<E> complementMinor = zeros(getRow() - 1, getColumn() - 1);
-				
-				// Get complement minor
-				for (int j = 0; j < complementMinor.getRow(); j++) {
-					for (int k = 0; k < complementMinor.getColumn(); k++) {
-						if (k < i) // Number at the bottom left-hand corner
-							complementMinor.setValue(j, k, getValue(j + 1, k));
-						else // Number at the bottom right-hand corner
-							complementMinor.setValue(j, k, getValue(j + 1, k + 1));
-					}
-				}
-				E coefficient = powOfMinusOne(i);
+		if (row > 2)
+			for (int i = 0; i < column; i++)
 				result = add(result, multiply(multiply(
-						getValue(0, i), complementMinor.getDeterminant()), coefficient));
-			}
-		}
-		else if (getRow() == 2)
+						getValue(0, i), getComplementMinor(0, i).getDeterminant()), powOfMinusOne(i)));
+		else if (row == 2)
 			result = subtract(multiply(getValue(0, 0),getValue(1, 1)), 
 					multiply(getValue(0, 1), getValue(1, 0)));
 		else
