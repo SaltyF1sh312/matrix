@@ -564,8 +564,7 @@ public abstract class GenericMatrix<E extends Number> {
 			for (int j = 0; j < column; j++) {
 				System.out.print(getValue(i, j) + "\t");
 			}
-			if (i != row - 1)
-				System.out.println();
+			System.out.println();
 		}
 		return "";
 	}
