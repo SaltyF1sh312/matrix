@@ -78,7 +78,10 @@ public abstract class GenericMatrix<E extends Number> {
 	 * @return the value of matrix[row][column]
 	 */
 	public E getValue(int row, int column) {
-		return matrix[row][column];
+		if (row < 0 || row >= this.row || column < 0 || column >= this.column)
+			throw new NullPointerException("Invalid input!");
+		else
+			return matrix[row][column];
 	}
 	/**
 	 * Set current value to the passed value in the matrix[row][column]
@@ -87,7 +90,10 @@ public abstract class GenericMatrix<E extends Number> {
 	 * @param value the value of matrix[row][column]
 	 */
 	public void setValue(int row, int column, E value) {
-		this.matrix[row][column] = value;
+		if (row < 0 || row >= this.row || column < 0 || column >= this.column)
+			throw new NullPointerException("Invalid input!");
+		else
+			this.matrix[row][column] = value;
 	}
 	/**
 	 * Abstract method for adding two elements of the matrices
