@@ -427,20 +427,20 @@ public abstract class GenericMatrix<E extends Number> {
 	 * @warn if the <code>GenericMatrix</code> is specified by integer, it may lose precision!
 	 */
 	public GenericMatrix<E> getUpperTriangularMatrix() {
-		GenericMatrix<E> upperTriangularMatrix = getCopy(); // Copy this to temporary to keep this from modifying
+		// Copy this to temporary to keep this from modifying
+		GenericMatrix<E> upperTriangularMatrix = getCopy();
 		
 		for (int i = 0; i < row; i++) {
 			E max = getValue(i, i);
 			int currentRow = i; // The row where max is
 			for (int k = 1; k < row - i; k++) {
-				// If element in the same column is greater than what in current row && the element is positive,
-				// commute the two rows
+				// If absolute value of an element in the same column is greater than what in current row,
 				if (compare(abs(upperTriangularMatrix.getValue(k, i)),abs(max)) > 0) {
 					max = getValue(k, i); // Update max
 					currentRow = k; // Update current row
 				}
 			}
-			upperTriangularMatrix.commuteRow(i, currentRow); 
+			upperTriangularMatrix.commuteRow(i, currentRow); // Commute the two rows
 			for (int j = 0; j <= i; j++) {
 				if (j < i) { // Turn elements that are not on the diagonal to zero
 					upperTriangularMatrix.subtractRow(i, j, upperTriangularMatrix.getValue(i, j));
