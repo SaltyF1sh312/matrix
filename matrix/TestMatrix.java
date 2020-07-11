@@ -3,9 +3,9 @@ package matrix;
 import java.math.BigInteger;
 
 public class TestMatrix {
-	final static Rational MINUSNINE = new Rational(new BigInteger("-9"), BigInteger.ONE);
-	final static Rational MINUSTWO= new Rational(new BigInteger("-2"), BigInteger.ONE);
-	final static Rational MINUSONE = new Rational(new BigInteger("-1"), BigInteger.ONE);
+	final static Rational MINUS_NINE = new Rational(new BigInteger("-9"), BigInteger.ONE);
+	final static Rational MINUS_TWO= new Rational(new BigInteger("-2"), BigInteger.ONE);
+	final static Rational MINUS_ONE = new Rational(new BigInteger("-1"), BigInteger.ONE);
 	final static Rational ONE = new Rational(BigInteger.ONE, BigInteger.ONE);
 	final static Rational TWO = new Rational(new BigInteger("2"), BigInteger.ONE);
 	final static Rational THREE = new Rational(new BigInteger("3"), BigInteger.ONE);
@@ -23,8 +23,8 @@ public class TestMatrix {
 			{3.0, -1.0, 8.0, 1.0}, {1.0, 3.0, -9.0, 7.0}};
 	static Rational[][] matrix5 = new Rational[][] {{FOUR, ONE, TWO, THREE}, {THREE, FOUR, ONE, TWO}, 
 		{TWO, THREE, FOUR, ONE}, {ONE, TWO, THREE, FOUR}};
-	static Rational[][] matrix6 = new Rational[][] {{ONE, MINUSONE, FIVE, MINUSONE}, {ONE, ONE, MINUSTWO, THREE},
-			{THREE, MINUSONE, EIGHT, ONE}, {ONE, THREE, MINUSNINE, SEVEN}};
+	static Rational[][] matrix6 = new Rational[][] {{ONE, MINUS_ONE, FIVE, MINUS_ONE}, 
+		{ONE, ONE, MINUS_TWO, THREE}, {THREE, MINUS_ONE, EIGHT, ONE}, {ONE, THREE, MINUS_NINE, SEVEN}};
 	
 	static GenericMatrix<Integer> integerMatrix1 = new IntegerMatrix(matrix1);
 	static GenericMatrix<Integer> integerMatrix2 = new IntegerMatrix(matrix2);
